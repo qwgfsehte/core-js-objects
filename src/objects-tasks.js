@@ -124,8 +124,8 @@ function isEmptyObject(obj) {
  *    immutableObj.newProp = 'new';
  *    console.log(immutableObj) => {a: 1, b: 2}
  */
-function makeImmutable(/* obj */) {
-  throw new Error('Not implemented');
+function makeImmutable(obj) {
+  return Object.freeze(obj);
 }
 
 /**
@@ -138,8 +138,14 @@ function makeImmutable(/* obj */) {
  *    makeWord({ a: [0, 1], b: [2, 3], c: [4, 5] }) => 'aabbcc'
  *    makeWord({ H:[0], e: [1], l: [2, 3, 8], o: [4, 6], W:[5], r:[7], d:[9]}) => 'HelloWorld'
  */
-function makeWord(/* lettersObject */) {
-  throw new Error('Not implemented');
+function makeWord(lettersObject) {
+  const str = [];
+  Object.keys(lettersObject).forEach((key) => {
+    lettersObject[key].forEach((item) => {
+      str[item] = key;
+    });
+  });
+  return str.join('');
 }
 
 /**
@@ -156,8 +162,26 @@ function makeWord(/* lettersObject */) {
  *    sellTickets([25, 25, 50]) => true
  *    sellTickets([25, 100]) => false (The seller does not have enough money to give change.)
  */
-function sellTickets(/* queue */) {
-  throw new Error('Not implemented');
+function sellTickets(queue) {
+  if (queue.length === 0) {
+    return true;
+  }
+  let num = 0;
+  queue.forEach((item) => {
+    if (item === 25) {
+      num += 25;
+    }
+    if (item === 50) {
+      num -= 25;
+    }
+    if (item === 100) {
+      num -= 25;
+    }
+  });
+  if (num > 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -173,8 +197,14 @@ function sellTickets(/* queue */) {
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  return {
+    width,
+    height,
+    getArea() {
+      return width * height;
+    },
+  };
 }
 
 /**
